@@ -28,7 +28,12 @@
     UIImage *image = info[UIImagePickerControllerOriginalImage];
     TOCropViewController *cropController = [[TOCropViewController alloc] initWithCroppingStyle:self.croppingStyle image:image];
     cropController.delegate = self;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [cropController replaceImage:[UIImage imageNamed:@"(null)"] withAnimated:true];
+    });
 
+    
     // Uncomment this if you wish to provide extra instructions via a title label
     //cropController.title = @"Crop Image";
 

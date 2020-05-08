@@ -286,6 +286,8 @@ The minimum croping aspect ratio. If set, user is prevented from setting croppin
  */
 - (void)moveCroppedContentToCenterAnimated:(BOOL)animated;
 
+- (void)replaceImage:(nonnull UIImage *)image withAnimated:(BOOL)animated;
+
 @end
 
 NS_ASSUME_NONNULL_END

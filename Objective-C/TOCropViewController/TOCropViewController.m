@@ -689,6 +689,11 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
     [self.cropView rotateImageNinetyDegreesAnimated:YES clockwise:NO];
 }
 
+- (void)replaceImage:(UIImage *)image withAnimated:(BOOL)animated {
+    self.image = image;
+    [self.cropView replaceImage: image withAnimated:animated];
+}
+
 #pragma mark - Crop View Delegates -
 - (void)cropViewDidBecomeResettable:(TOCropView *)cropView
 {

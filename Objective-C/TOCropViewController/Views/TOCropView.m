@@ -26,6 +26,7 @@
 #import "TOCropOverlayView.h"
 #import "TOCropScrollView.h"
 
+
 #define TOCROPVIEW_BACKGROUND_COLOR [UIColor colorWithWhite:0.12f alpha:1.0f]
 
 static const CGFloat kTOCropViewPadding = 14.0f;
@@ -246,6 +247,22 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     self.gridPanGestureRecognizer.delegate = self;
     [self.scrollView.panGestureRecognizer requireGestureRecognizerToFail:self.gridPanGestureRecognizer];
     [self addGestureRecognizer:self.gridPanGestureRecognizer];
+}
+
+- (void)replaceImage:(UIImage *)image withAnimated:(BOOL)animated {
+    self.image = image;
+    /// set frames
+    if (animated) {
+        [UIView transitionWithView:self.scrollView duration:0.25 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            self.foregroundImageView.image = image;
+            self.backgroundImageView.image = image;
+        } completion:nil];
+        [UIView animateWithDuration:0.25 animations:^{
+            [self resetLayoutToDefaultAnimated:false];
+        }];
+    } else {
+        [self resetLayoutToDefaultAnimated:false];
+    }
 }
 
 #pragma mark - View Layout -
